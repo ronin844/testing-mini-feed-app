@@ -88,12 +88,8 @@ This section is optional, but it is a good idea to add it if you want other peop
 
 Screenshots:
 
-![Project Screenshot 1](project_image1.png)
-![Project Screenshot 2](project_image2.png)
+![Project Screenshot 1](/images/project_image1.png)
+![Project Screenshot 2](/images/project_image2.png)
 
 
-## Notes
 
-- Do not commit your `.env` file
-- The screenshot files `project_image1.png` and `project_image2.png` are ignored locally so they do not get uploaded to the repository
-- Make sure MongoDB and ImageKit credentials are valid before running the backend

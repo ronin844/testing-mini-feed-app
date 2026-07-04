@@ -10,10 +10,6 @@ build/
 .env
 .env.*
 
-# Local screenshots
-project_image1.png
-project_image2.png
-
 # Logs
 *.log
 npm-debug.log*
