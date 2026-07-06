@@ -49,6 +49,11 @@ html {
   cursor: pointer;
 }
 
+.create-post-section button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .feed-section{
   display: flex;
   flex-direction: column;
@@ -67,6 +72,10 @@ html {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   width: 400px;
   margin-bottom: 20px;
+}
+.loading-state {
+  color: #555;
+  font-size: 1rem;
 }
 .post-card img{
   width: 100%;

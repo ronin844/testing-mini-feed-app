@@ -1,40 +1,51 @@
-import React, {useState,useEffect} from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 const Feed = () => {
-    const [posts, setPosts] = useState([
-        {
-            _id: 1,
-            image: 'https://images.unsplash.com/photo-1782848796343-4b5472b802f4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            caption: 'This is a beautiful sunset!',
-        }
-    ])
+    const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        axios.get('http://localhost:3000/posts')
-            .then((response) => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/posts');
                 setPosts(response.data.posts);
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error('Error fetching posts:', error);
-            });
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-    }, [])
-  return (
-   <section className='feed-section'>
-    {
-        posts.length > 0 ? (
-            posts.map((post) => (
-                <div key={post._id} className='post-card'>
-                    <img src={post.image} alt={post.caption} />
-                    <p>{post.caption}</p>
-                </div>
-            ))
-        ) : (
-            <p>No posts available.</p>
-        )
+        fetchPosts();
+    }, []);
+
+    if (isLoading) {
+        return (
+            <section className='feed-section'>
+                <p className='loading-state'>Loading posts...</p>
+            </section>
+        );
     }
-     
-   </section>
-  )
-}
 
-export default Feed
+    if (posts.length === 0) {
+        return (
+            <section className='feed-section'>
+                <p>No posts available.</p>
+            </section>
+        );
+    }
+
+    return (
+        <section className='feed-section'>
+            {posts.map((post) => (
+                    <div key={post._id} className='post-card'>
+                        <img src={post.image} alt={post.caption} />
+                        <p>{post.caption}</p>
+                    </div>
+                ))}
+        </section>
+    );
+};
+
+export default Feed;
